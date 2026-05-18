@@ -6,6 +6,11 @@ interface TimelineModuleProps {
 }
 
 const lessonTypeIcons = {
+  live: (
+    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+      <path d="M15 10l4.553-2.069A1 1 0 0121 8.882v6.236a1 1 0 01-1.447.894L15 14M3 8a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  ),
   video: (
     <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
       <polygon points="5 3 19 12 5 21 5 3" />
@@ -29,6 +34,7 @@ const lessonTypeIcons = {
 };
 
 const lessonTypeColors = {
+  live: 'text-green-400 bg-green-400/10',
   video: 'text-brand-blue bg-brand-blue/10',
   practice: 'text-brand-cyan bg-brand-cyan/10',
   quiz: 'text-yellow-400 bg-yellow-400/10',
@@ -36,6 +42,7 @@ const lessonTypeColors = {
 };
 
 const lessonTypeLabels = {
+  live: 'En direct',
   video: 'Vidéo',
   practice: 'Pratique',
   quiz: 'Quiz',

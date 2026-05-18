@@ -7,9 +7,9 @@ export const faqDevops: FAQ[] = [
       'Oui, absolument. La formation est conçue pour les développeurs qui savent coder mais qui n\'ont jamais touché au déploiement, aux serveurs ou à Docker. Aucune expérience DevOps préalable n\'est requise. Vous avez juste besoin de bases en développement web (HTML/CSS/JS ou backend).',
   },
   {
-    question: 'Combien de temps ai-je accès à la formation ?',
+    question: 'Comment se déroulent les sessions ?',
     answer:
-      'L\'accès est à vie. Une fois que vous avez rejoint la formation, vous pouvez y accéder quand vous voulez, autant de fois que vous le souhaitez. Les mises à jour futures sont incluses gratuitement.',
+      'La formation se déroule en sessions live sur Google Meet ou Zoom, en groupe restreint. Chaque session alterne théorie, démonstrations en direct et exercices pratiques sur votre VPS. Le formateur est présent tout au long pour répondre à vos questions en temps réel.',
   },
   {
     question: 'Y a-t-il des prérequis techniques ?',
@@ -19,17 +19,12 @@ export const faqDevops: FAQ[] = [
   {
     question: 'Quel matériel ai-je besoin pour suivre la formation ?',
     answer:
-      'Un ordinateur (Windows, Mac ou Linux) avec une connexion internet. Vous aurez besoin d\'un VPS (serveur Linux) que vous pouvez louer pour environ 5€/mois chez DigitalOcean, Hetzner ou OVH. Le coût total du matériel pour les exercices est inférieur à 10€.',
+      'Un ordinateur (Windows, Mac ou Linux) avec une connexion internet stable. C\'est tout. Un VPS Linux dédié vous est fourni pendant toute la durée de la formation : vous n\'avez rien à louer ni à configurer au préalable.',
   },
   {
-    question: 'La formation est-elle mise à jour régulièrement ?',
+    question: 'Le contenu est-il à jour avec les outils actuels ?',
     answer:
-      'Oui. Le monde DevOps évolue vite et nous mettons la formation à jour régulièrement pour refléter les dernières versions des outils et les meilleures pratiques actuelles. Toutes les mises à jour sont incluses dans votre accès.',
-  },
-  {
-    question: 'Proposez-vous des formations pour les entreprises ?',
-    answer:
-      'Oui, nous avons des offres sur mesure pour les entreprises qui souhaitent former plusieurs développeurs en même temps. Nous pouvons adapter le contenu à votre stack technique et proposer des sessions en groupe. Contactez-nous pour un devis.',
+      'Oui. Le programme est revu entre chaque session pour refléter les dernières versions des outils et les meilleures pratiques en vigueur. Vous travaillez avec les mêmes versions qu\'en production dans les équipes tech aujourd\'hui.',
   },
   {
     question: 'Y a-t-il un support pendant la formation ?',
@@ -42,9 +37,9 @@ export const faqDevops: FAQ[] = [
       'Nous offrons une garantie satisfait ou remboursé de 14 jours. Si la formation ne correspond pas à vos attentes dans les 14 jours suivant l\'achat, nous vous remboursons intégralement, sans question.',
   },
   {
-    question: 'La formation est-elle certifiante ?',
+    question: 'La formation débouche-t-elle sur une certification ?',
     answer:
-      'La formation délivre un certificat de complétion reconnu par la communauté. Bien qu\'il ne s\'agisse pas d\'une certification officielle type AWS ou CKA, il témoigne de compétences concrètes validées par un projet réel, ce que les recruteurs tech apprécient.',
+      'Non. Cette formation ne délivre pas de certification officielle. Ce que vous repartez avec, c\'est un projet réel déployé en production, un pipeline CI/CD fonctionnel et un serveur configuré de A à Z — des preuves concrètes de compétences que vous pouvez montrer directement à un recruteur ou à votre équipe.',
   },
   {
     question: 'Quelle est la différence avec une formation sur Udemy ou YouTube ?',
@@ -67,6 +62,6 @@ export const faqGeneral: FAQ[] = [
   {
     question: 'Proposez-vous des formations en présentiel ?',
     answer:
-      'Pour l\'instant, toutes nos formations sont en ligne et en autonomie. Nous travaillons sur des formats live et des bootcamps intensifs qui seront disponibles prochainement.',
+      'Nos formations sont en ligne, en direct sur Google Meet ou Zoom. Elles combinent l\'interactivité du présentiel (formateur en live, questions en temps réel, exercices immédiats) avec la flexibilité du distanciel.',
   },
 ];

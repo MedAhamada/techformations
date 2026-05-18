@@ -1,14 +1,14 @@
 import { Link } from 'react-router-dom';
+import { GitBranch } from 'lucide-react';
 import { useInView } from 'react-intersection-observer';
-import AnimatedTerminal from '../components/ui/AnimatedTerminal';
 import MetricsCard from '../components/ui/MetricsCard';
 import FormationCard from '../components/ui/FormationCard';
-import TestimonialCard from '../components/ui/TestimonialCard';
+// import TestimonialCard from '../components/ui/TestimonialCard'; // hidden
 import CTASection from '../components/ui/CTASection';
 import PipelineAnimation from '../components/ui/PipelineAnimation';
 import TechBadge from '../components/ui/TechBadge';
 import { formations } from '../data/formations';
-import { testimonials } from '../data/testimonials';
+// import { testimonials } from '../data/testimonials'; // hidden
 
 function SectionWrapper({ children, className = '', style }: { children: React.ReactNode; className?: string; style?: React.CSSProperties }) {
   const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true });
@@ -122,6 +122,7 @@ export default function HomePage() {
               </div>
 
               {/* Stats */}
+              {/*
               <div className="flex items-center gap-8 mt-12 justify-center lg:justify-start animate-fade-in animation-delay-600">
                 <div className="text-center lg:text-left">
                   <p className="text-2xl font-bold text-white">847+</p>
@@ -144,12 +145,37 @@ export default function HomePage() {
                   <p className="text-slate-500 text-xs">complétion</p>
                 </div>
               </div>
+              */}
             </div>
 
             {/* Right: Terminal + Metrics */}
-            <div className="space-y-4 animate-fade-in animation-delay-400">
-              <AnimatedTerminal />
-              <MetricsCard />
+            
+            {/* Right: dashboard */}
+            <div className="relative animate-fade-in" style={{ animationDelay: '0.3s' }}>
+              <div className="relative">
+                {/* Glow */}
+                <div className="absolute -inset-4 bg-blue-500/10 rounded-3xl blur-xl" />
+
+                <div className="relative space-y-3">
+                  {/* Metrics row */}
+                  <div className="grid grid-cols-2 gap-3">
+                    <MetricsCard label="Déploiements" value="24/7" change="+12% ce mois" trend="up" color="green" />
+                    <MetricsCard label="Uptime" value="99.9%" change="30j sans incident" trend="up" color="cyan" />
+                  </div>
+
+                  {/* Terminal */}
+                  {/*<AnimatedTerminal className="w-full" />*/}
+
+                  {/* Pipeline */}
+                  <div className="glass rounded-2xl p-4">
+                    <div className="text-xs font-medium text-slate-400 mb-3 flex items-center gap-2">
+                      <GitBranch className="w-3.5 h-3.5 text-blue-400" />
+                      Pipeline CI/CD
+                    </div>
+                    <PipelineAnimation />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -269,8 +295,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="py-24">
+      {/* Testimonials — hidden, re-enable when ready */}
+      {/* <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionWrapper className="text-center mb-12">
             <span className="section-badge mb-4">Témoignages</span>
@@ -288,7 +314,6 @@ export default function HomePage() {
             </div>
           </SectionWrapper>
 
-          {/* Aggregate rating */}
           <SectionWrapper className="mt-12 text-center">
             <div className="inline-flex items-center gap-6 px-8 py-4 glass rounded-2xl border border-white/5">
               <div>
@@ -309,7 +334,7 @@ export default function HomePage() {
             </div>
           </SectionWrapper>
         </div>
-      </section>
+      </section> */}
 
       {/* Stats */}
       <section className="py-16 border-y border-white/5 bg-dark-800/30">

@@ -1,96 +1,107 @@
+'use client';
+
 import { useState, useEffect, useRef } from 'react';
-import { useInView } from 'react-intersection-observer';
 
 interface TerminalLine {
-  type: 'command' | 'output' | 'success' | 'info' | 'warning';
-  content: string;
-  delay?: number;
+  type: 'command' | 'output' | 'success' | 'error' | 'info';
+  text: string;
+  delay: number;
 }
+
+const defaultLines: TerminalLine[] = [
+  { type: 'info', text: '# Déploiement en production...', delay: 0 },
+  { type: 'command', text: 'git push origin main', delay: 600 },
+  { type: 'output', text: '→ Pushing to github.com/user/app.git', delay: 1000 },
+  { type: 'success', text: '✓ Build triggered on GitHub Actions', delay: 1600 },
+  { type: 'command', text: 'docker build -t app:latest .', delay: 2400 },
+  { type: 'output', text: '→ Building image... [12/12]', delay: 3200 },
+  { type: 'success', text: '✓ Image built in 18.3s', delay: 3800 },
+  { type: 'command', text: 'docker-compose up -d --pull always', delay: 4600 },
+  { type: 'output', text: '→ Pulling nginx:alpine...', delay: 5200 },
+  { type: 'output', text: '→ Starting containers...', delay: 5800 },
+  { type: 'success', text: '✓ All services healthy', delay: 6400 },
+  { type: 'command', text: 'certbot renew --nginx', delay: 7200 },
+  { type: 'success', text: '✓ Certificate renewed (Let\'s Encrypt)', delay: 7800 },
+  { type: 'info', text: '→ Deployment complete in 23.4s 🚀', delay: 8400 },
+];
 
 interface AnimatedTerminalProps {
   lines?: TerminalLine[];
   className?: string;
-  title?: string;
+  autoPlay?: boolean;
 }
 
-const defaultLines: TerminalLine[] = [
-  { type: 'command', content: 'docker-compose up -d', delay: 0 },
-  { type: 'output', content: 'Creating network "app_default" with the default driver', delay: 600 },
-  { type: 'output', content: 'Creating volume "app_postgres_data" with default driver', delay: 900 },
-  { type: 'output', content: 'Creating app_postgres_1 ... done', delay: 1200 },
-  { type: 'output', content: 'Creating app_redis_1 ... done', delay: 1400 },
-  { type: 'output', content: 'Creating app_backend_1 ... done', delay: 1600 },
-  { type: 'output', content: 'Creating app_nginx_1 ... done', delay: 1800 },
-  { type: 'success', content: '✓ All services started successfully', delay: 2200 },
-  { type: 'command', content: 'git push origin main', delay: 3000 },
-  { type: 'info', content: '→ Triggering CI/CD pipeline...', delay: 3600 },
-  { type: 'output', content: '✓ Tests passed (47/47)', delay: 4200 },
-  { type: 'output', content: '✓ Docker image built & pushed', delay: 4600 },
-  { type: 'output', content: '✓ Deployed to production', delay: 5000 },
-  { type: 'success', content: '🚀 Deployment complete — zero downtime', delay: 5400 },
-];
-
-const colorMap: Record<TerminalLine['type'], string> = {
-  command: 'text-brand-cyan',
-  output: 'text-slate-400',
-  success: 'text-green-400',
-  info: 'text-brand-blue',
-  warning: 'text-yellow-400',
-};
-
-export default function AnimatedTerminal({ lines = defaultLines, className = '', title = 'terminal' }: AnimatedTerminalProps) {
-  const [visibleLines, setVisibleLines] = useState<number>(0);
-  const { ref, inView } = useInView({ threshold: 0.3, triggerOnce: true });
-  const hasStarted = useRef(false);
+export default function AnimatedTerminal({ lines = defaultLines, className = '', autoPlay = true }: AnimatedTerminalProps) {
+  const [visibleLines, setVisibleLines] = useState<TerminalLine[]>([]);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!inView || hasStarted.current) return;
-    hasStarted.current = true;
+    if (!autoPlay) return;
+    const timers: ReturnType<typeof setTimeout>[] = [];
 
-    lines.forEach((line, index) => {
-      setTimeout(() => {
-        setVisibleLines(index + 1);
-      }, line.delay ?? index * 400);
+    lines.forEach((line) => {
+      const t = setTimeout(() => {
+        setVisibleLines((prev) => [...prev, line]);
+        if (containerRef.current) {
+          containerRef.current.scrollTop = containerRef.current.scrollHeight;
+        }
+      }, line.delay);
+      timers.push(t);
     });
-  }, [inView, lines]);
+
+    const reset = setTimeout(() => {
+      setVisibleLines([]);
+    }, lines[lines.length - 1].delay + 3000);
+    timers.push(reset);
+
+    return () => timers.forEach(clearTimeout);
+  }, [autoPlay, lines]);
+
+  const getLineStyle = (type: TerminalLine['type']) => {
+    switch (type) {
+      case 'command': return 'text-white font-mono';
+      case 'success': return 'text-green-400 font-mono';
+      case 'error': return 'text-red-400 font-mono';
+      case 'info': return 'text-slate-400 font-mono';
+      case 'output': return 'text-slate-300 font-mono';
+      default: return 'text-slate-300 font-mono';
+    }
+  };
+
+  const getPrompt = (type: TerminalLine['type']) => {
+    if (type === 'command') return <span className="text-cyan-400 mr-2">$</span>;
+    return null;
+  };
 
   return (
-    <div ref={ref} className={`rounded-xl overflow-hidden shadow-2xl shadow-black/50 border border-white/10 ${className}`}>
-      {/* Terminal header */}
-      <div className="flex items-center gap-2 px-4 py-3 bg-dark-800/80 border-b border-white/5">
+    <div className={`rounded-2xl overflow-hidden border border-white/10 bg-slate-900/80 backdrop-blur shadow-2xl ${className}`}>
+      {/* Title bar */}
+      <div className="flex items-center gap-2 px-4 py-3 bg-slate-800/60 border-b border-white/8">
         <div className="flex items-center gap-1.5">
-          <span className="w-3 h-3 rounded-full bg-red-500/80" />
-          <span className="w-3 h-3 rounded-full bg-yellow-500/80" />
-          <span className="w-3 h-3 rounded-full bg-green-500/80" />
+          <div className="w-3 h-3 rounded-full bg-red-500/80" />
+          <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
+          <div className="w-3 h-3 rounded-full bg-green-500/80" />
         </div>
         <div className="flex-1 text-center">
-          <span className="text-slate-500 text-xs font-mono">{title}</span>
+          <span className="text-xs text-slate-500 font-mono">deploy@production ~</span>
         </div>
       </div>
 
-      {/* Terminal body */}
-      <div className="bg-dark-950/90 p-5 min-h-[280px] font-mono text-sm overflow-hidden">
-        {lines.slice(0, visibleLines).map((line, index) => (
-          <div key={index} className="flex items-start gap-2 mb-1.5 animate-fade-in">
-            {line.type === 'command' && (
-              <span className="text-brand-violet select-none mt-0.5">$</span>
-            )}
-            {line.type !== 'command' && (
-              <span className="text-dark-600 select-none mt-0.5 w-3"> </span>
-            )}
-            <span className={colorMap[line.type]}>{line.content}</span>
+      {/* Terminal content */}
+      <div
+        ref={containerRef}
+        className="p-5 space-y-1.5 min-h-[240px] max-h-[320px] overflow-y-auto font-mono text-sm"
+      >
+        {visibleLines.map((line, i) => (
+          <div key={i} className={`flex items-start gap-0 animate-fade-in leading-relaxed ${getLineStyle(line.type)}`}>
+            {getPrompt(line.type)}
+            <span>{line.text}</span>
           </div>
         ))}
-        {inView && visibleLines < lines.length && (
-          <div className="flex items-center gap-2">
-            <span className="text-brand-violet">$</span>
-            <span className="w-2 h-4 bg-brand-cyan animate-blink inline-block" />
-          </div>
-        )}
-        {visibleLines >= lines.length && (
-          <div className="flex items-center gap-2 mt-1">
-            <span className="text-brand-violet">$</span>
-            <span className="w-2 h-4 bg-brand-cyan animate-blink inline-block" />
+        {visibleLines.length < lines.length && (
+          <div className="flex items-center">
+            <span className="text-cyan-400 mr-2">$</span>
+            <span className="terminal-cursor text-slate-400" />
           </div>
         )}
       </div>

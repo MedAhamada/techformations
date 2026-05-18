@@ -12,7 +12,6 @@ export default function Footer() {
     Plateforme: [
       { label: 'À propos', href: '/a-propos' },
       { label: 'Contact', href: '/contact' },
-      { label: 'Formation entreprise', href: '/contact' },
     ],
     Ressources: [
       { label: 'Blog technique', href: '#' },

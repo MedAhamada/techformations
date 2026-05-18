@@ -45,7 +45,7 @@ export interface FormationModule {
 
 export interface FormationLesson {
   title: string;
-  type: 'video' | 'practice' | 'quiz' | 'project';
+  type: 'live' | 'video' | 'practice' | 'quiz' | 'project';
   duration?: string;
 }
 

@@ -10,13 +10,11 @@ function SectionWrapper({ children, className = '' }: { children: React.ReactNod
   );
 }
 
-type FormType = 'question' | 'inscription' | 'entreprise';
+type FormType = 'question' | 'inscription';
 
 interface ContactForm {
   name: string;
   email: string;
-  company: string;
-  teamSize: string;
   subject: string;
   message: string;
   type: FormType;
@@ -25,8 +23,6 @@ interface ContactForm {
 const initialForm: ContactForm = {
   name: '',
   email: '',
-  company: '',
-  teamSize: '',
   subject: '',
   message: '',
   type: 'question',
@@ -53,16 +49,6 @@ const contactOptions: Array<{ id: FormType; label: string; icon: React.ReactNode
       </svg>
     ),
   },
-  {
-    id: 'entreprise',
-    label: 'Formation entreprise',
-    desc: 'Former votre équipe de développeurs',
-    icon: (
-      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-        <path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
-  },
 ];
 
 export default function ContactPage() {
@@ -76,7 +62,6 @@ export default function ContactPage() {
     if (!form.name.trim()) newErrors.name = 'Requis';
     if (!form.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) newErrors.email = 'Email invalide';
     if (!form.message.trim()) newErrors.message = 'Requis';
-    if (form.type === 'entreprise' && !form.company.trim()) newErrors.company = 'Requis';
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -143,7 +128,7 @@ export default function ContactPage() {
             <span className="gradient-text">vous aider</span>
           </h1>
           <p className="section-subtitle max-w-xl mx-auto">
-            Question sur une formation, demande d'inscription ou projet de formation en entreprise — contactez-nous, nous répondons sous 24h.
+            Question sur une formation ou demande d'inscription — contactez-nous, nous répondons sous 24h.
           </p>
         </div>
       </section>
@@ -193,31 +178,6 @@ export default function ContactPage() {
                   </svg>
                 </a>
 
-                {/* Enterprise CTA */}
-                <div className="rounded-xl border border-brand-violet/20 bg-brand-violet/5 p-6">
-                  <div className="text-2xl mb-3">🏢</div>
-                  <h3 className="text-white font-bold mb-2">Formation entreprise</h3>
-                  <p className="text-slate-400 text-sm mb-4 leading-relaxed">
-                    Vous souhaitez former votre équipe de développeurs ? Nous proposons des formations sur mesure, intra-entreprise, avec facturation et prise en charge OPCO possible.
-                  </p>
-                  <ul className="space-y-2 text-sm">
-                    {[
-                      'Contenu adapté à votre stack',
-                      'Sessions live ou en autonomie',
-                      'Tableau de bord d\'avancement',
-                      'Certification d\'équipe',
-                    ].map(item => (
-                      <li key={item} className="flex items-center gap-2 text-slate-300">
-                        <span className="w-4 h-4 rounded-full bg-brand-violet/20 text-brand-violet flex items-center justify-center flex-shrink-0">
-                          <svg className="w-2.5 h-2.5" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
-                            <path d="M5 13l4 4L19 7" strokeLinecap="round" strokeLinejoin="round" />
-                          </svg>
-                        </span>
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
               </div>
             </SectionWrapper>
 
@@ -302,41 +262,6 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-                {form.type === 'entreprise' && (
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium text-slate-300 mb-1.5">
-                        Entreprise <span className="text-red-400">*</span>
-                      </label>
-                      <input
-                        type="text"
-                        value={form.company}
-                        onChange={set('company')}
-                        placeholder="Ma Startup SAS"
-                        className={`w-full px-4 py-3 bg-dark-800 border rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-1 text-sm transition-all ${
-                          errors.company ? 'border-red-400/50' : 'border-white/10 focus:border-brand-blue/50 focus:ring-brand-blue/20'
-                        }`}
-                      />
-                      {errors.company && <p className="text-red-400 text-xs mt-1">{errors.company}</p>}
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-slate-300 mb-1.5">
-                        Taille de l'équipe
-                      </label>
-                      <select
-                        value={form.teamSize}
-                        onChange={set('teamSize')}
-                        className="w-full px-4 py-3 bg-dark-800 border border-white/10 rounded-xl text-white focus:outline-none focus:border-brand-blue/50 focus:ring-1 focus:ring-brand-blue/20 text-sm transition-all"
-                      >
-                        <option value="">Sélectionner…</option>
-                        <option value="2-5">2 à 5 développeurs</option>
-                        <option value="6-15">6 à 15 développeurs</option>
-                        <option value="16-50">16 à 50 développeurs</option>
-                        <option value="50+">50+ développeurs</option>
-                      </select>
-                    </div>
-                  </div>
-                )}
 
                 <div>
                   <label className="block text-sm font-medium text-slate-300 mb-1.5">Sujet</label>
