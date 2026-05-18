@@ -19,6 +19,7 @@ export interface Formation {
   image?: string;
   color: string;
   accentColor: string;
+  nextSession?: string;
   modules?: FormationModule[];
   instructor?: Instructor;
   stats?: FormationStats;

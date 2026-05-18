@@ -18,41 +18,18 @@ const values = [
   },
   {
     icon: '🏗️',
-    title: 'Terrain avant académisme',
-    desc: 'Nos formateurs ont tous travaillé sur des projets réels à fort trafic. Pas de cours magistraux, que des retours d\'expérience terrain.',
+    title: 'L\'expérience du terrain',
+    desc: 'Ce que nous enseignons, nous l\'avons vécu : déploiements en production, incidents à 3h du matin, migrations complexes. Que du retour d\'expérience réel.',
+  },
+  {
+    icon: '❤️',
+    title: 'La passion de transmettre',
+    desc: 'Après des années à apprendre sur le tas, nous voulons que d\'autres aillent plus vite. Partager ce qu\'on sait est pour nous aussi important que de le savoir.',
   },
   {
     icon: '🔄',
     title: 'Toujours à jour',
-    desc: 'Le monde tech évolue vite. Nos formations sont mises à jour régulièrement pour rester pertinentes avec les dernières pratiques.',
-  },
-  {
-    icon: '🤝',
-    title: 'Communauté d\'abord',
-    desc: 'L\'apprentissage est plus efficace en communauté. Nos apprenants partagent, s\'entraident et progressent ensemble.',
-  },
-];
-
-const timeline = [
-  {
-    year: '2022',
-    title: 'Première formation',
-    desc: 'Lancement de la première formation DevOps pour développeurs, après des mois de retours terrain et de tests avec des développeurs.',
-  },
-  {
-    year: '2023',
-    title: 'Communauté',
-    desc: 'Création de notre Discord et accueil des premiers 500 membres. La communauté devient le cœur de la plateforme.',
-  },
-  {
-    year: '2024',
-    title: 'Croissance',
-    desc: 'Plus de 800 développeurs formés, note de 4.9/5 maintenue. Développement du catalogue de formations.',
-  },
-  {
-    year: '2025',
-    title: 'Expansion',
-    desc: 'Lancement de nouvelles formations : Docker avancé, Kubernetes, Architecture Cloud. La plateforme s\'étend.',
+    desc: 'Le monde tech évolue vite. Nos formations sont pensées pour rester pertinentes avec les dernières pratiques du secteur.',
   },
 ];
 
@@ -64,13 +41,13 @@ export default function AboutPage() {
         <div className="absolute inset-0 grid-bg opacity-40" />
         <div className="absolute inset-0 bg-hero-gradient" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <span className="section-badge mb-6">Notre histoire</span>
+          <span className="section-badge mb-6">Notre approche</span>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 max-w-3xl mx-auto">
             Formés par des praticiens,{' '}
             <span className="gradient-text">pour des praticiens</span>
           </h1>
           <p className="section-subtitle max-w-2xl mx-auto">
-            TechFormations est née d'une frustration simple : les formations tech existantes sont trop théoriques et trop éloignées de la réalité du terrain.
+            TechFormations est née d'une conviction simple : les meilleures formations sont celles créées par des gens qui ont vraiment exercé le métier, sur de vrais projets, avec de vraies contraintes.
           </p>
         </div>
       </section>
@@ -87,36 +64,52 @@ export default function AboutPage() {
               </h2>
               <div className="space-y-4 text-slate-300 leading-relaxed">
                 <p>
-                  Il y a une fracture dans le monde du développement. D'un côté, des milliers de développeurs qui savent coder, créer des interfaces, connecter des APIs. De l'autre, la production — ce territoire mystérieux fait de serveurs, de déploiements qui "cassent", de Nginx incompréhensible et de Docker qui fait peur.
+                  Il y a une fracture dans le monde du développement. D'un côté, des milliers de développeurs qui savent coder, créer des interfaces, connecter des APIs. De l'autre, la production — ce territoire fait de serveurs, de déploiements qui "cassent", de Nginx incompréhensible et de Docker qui fait peur.
                 </p>
                 <p>
-                  TechFormations est née pour combler ce fossé. Notre mission est simple : former des développeurs capables de gérer leur infrastructure de A à Z, sans dépendre d'une autre équipe, sans peur de la prod, avec les outils et méthodes des meilleurs ingénieurs.
+                  On a vécu ça. On a passé des années à construire et opérer des infrastructures réelles, à résoudre des incidents en production, à mettre en place des pipelines CI/CD robustes. Cette expérience, on a décidé de la mettre au service de ceux qui apprennent.
                 </p>
                 <p>
-                  Chaque formation que nous créons suit le même principe : partir d'un problème réel, le résoudre concrètement, avec les vrais outils utilisés en production.
+                  Chaque formation que nous créons suit le même principe : partir d'un problème réel, le résoudre concrètement, avec les vrais outils utilisés par les équipes d'ingénierie aujourd'hui.
                 </p>
               </div>
             </SectionWrapper>
 
-            {/* Stats card */}
             <SectionWrapper>
-              <div className="glass rounded-2xl border border-white/10 p-8">
-                <h3 className="text-white font-bold text-xl mb-6">En chiffres</h3>
-                <div className="grid grid-cols-2 gap-6">
-                  {[
-                    { value: '847+', label: 'Développeurs formés' },
-                    { value: '4.9/5', label: 'Note moyenne' },
-                    { value: '94%', label: 'Taux de complétion' },
-                    { value: '14j', label: 'Garantie remboursement' },
-                    { value: '35h+', label: 'Contenu par formation' },
-                    { value: '8', label: 'Formations en cours' },
-                  ].map(stat => (
-                    <div key={stat.label} className="text-center p-4 rounded-xl bg-white/3">
-                      <p className="text-3xl font-bold gradient-text mb-1">{stat.value}</p>
-                      <p className="text-slate-400 text-xs">{stat.label}</p>
+              <div className="glass rounded-2xl border border-white/10 p-8 space-y-5">
+                <h3 className="text-white font-bold text-xl mb-2">Ce qu'on apporte</h3>
+                {[
+                  {
+                    icon: '⚙️',
+                    title: '10+ ans d\'expérience terrain',
+                    desc: 'Des projets réels à fort trafic, avec de vraies contraintes de production et de vraies deadlines.',
+                  },
+                  {
+                    icon: '🐳',
+                    title: 'Docker, Linux, CI/CD au quotidien',
+                    desc: 'Des outils pratiqués professionnellement pendant des années, pas appris spécialement pour enseigner.',
+                  },
+                  {
+                    icon: '🚀',
+                    title: 'Des projets fil rouge complets',
+                    desc: 'Chaque formation s\'articule autour d\'un projet réaliste, de A à Z, comme en conditions professionnelles.',
+                  },
+                  {
+                    icon: '🎓',
+                    title: 'Des formations pensées par des ingénieurs',
+                    desc: 'Conçues pour aller droit au but : les bonnes pratiques, les vrais problèmes, les vraies solutions.',
+                  },
+                ].map(item => (
+                  <div key={item.title} className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-brand-blue/10 flex items-center justify-center text-xl flex-shrink-0">
+                      {item.icon}
                     </div>
-                  ))}
-                </div>
+                    <div>
+                      <p className="text-white font-semibold text-sm">{item.title}</p>
+                      <p className="text-slate-400 text-sm leading-relaxed">{item.desc}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
             </SectionWrapper>
           </div>
@@ -152,7 +145,7 @@ export default function AboutPage() {
             <span className="section-badge mb-4">Pédagogie</span>
             <h2 className="section-title mb-4">Notre approche pédagogique</h2>
             <p className="section-subtitle max-w-2xl mx-auto">
-              Une méthode éprouvée pour apprendre vite et durablement.
+              Une méthode calquée sur ce qui fonctionne vraiment pour apprendre vite et durablement.
             </p>
           </SectionWrapper>
 
@@ -189,43 +182,55 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Timeline */}
+      {/* Ce qui nous différencie */}
       <section className="py-20 bg-dark-800/30 border-y border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionWrapper className="text-center mb-12">
-            <span className="section-badge mb-4">Histoire</span>
-            <h2 className="section-title mb-4">Notre parcours</h2>
+            <span className="section-badge mb-4">Notre différence</span>
+            <h2 className="section-title mb-4">Pourquoi nos formations sont différentes</h2>
+            <p className="section-subtitle max-w-2xl mx-auto">
+              Pas des enseignants qui ont appris à enseigner. Des ingénieurs qui ont exercé le métier, et qui transmettent ce qu'ils ont réellement pratiqué.
+            </p>
           </SectionWrapper>
 
           <SectionWrapper>
-            <div className="max-w-3xl mx-auto">
-              <div className="relative">
-                <div className="absolute left-8 top-0 bottom-0 w-px bg-gradient-to-b from-brand-blue via-brand-cyan to-transparent" />
-                <div className="space-y-8">
-                  {timeline.map((item, i) => (
-                    <div key={i} className="flex gap-6 items-start pl-4">
-                      <div className="w-9 h-9 rounded-full bg-gradient-to-br from-brand-blue to-brand-cyan flex items-center justify-center flex-shrink-0 text-white text-xs font-bold shadow-glow-blue relative z-10">
-                        {item.year.slice(-2)}
-                      </div>
-                      <div className="flex-1 pt-1">
-                        <div className="flex items-center gap-3 mb-1">
-                          <span className="text-brand-blue font-mono text-sm">{item.year}</span>
-                          <h3 className="text-white font-bold">{item.title}</h3>
-                        </div>
-                        <p className="text-slate-400 text-sm leading-relaxed">{item.desc}</p>
-                      </div>
-                    </div>
-                  ))}
+            <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+              {[
+                {
+                  title: 'Des outils utilisés en production',
+                  desc: 'On n\'invente pas des exercices pédagogiques. On transpose directement ce qu\'on fait dans les projets réels — les mêmes outils, les mêmes configurations, les mêmes arbitrages.',
+                  icon: '🛠️',
+                },
+                {
+                  title: 'Des problèmes qu\'on a vraiment résolus',
+                  desc: 'Chaque module est issu d\'une situation concrète rencontrée en production. On enseigne les solutions parce qu\'on a d\'abord vécu les problèmes.',
+                  icon: '🔍',
+                },
+                {
+                  title: 'Un projet complet, pas des exercices isolés',
+                  desc: 'Les formations s\'articulent autour d\'un projet réaliste de bout en bout. Les apprenants repartent avec quelque chose de tangible, pas juste des notes de cours.',
+                  icon: '🚢',
+                },
+                {
+                  title: 'Le vrai niveau de complexité',
+                  desc: 'On ne simplifie pas à l\'excès. On prépare aux situations réelles, avec leur vraie complexité, pour que la formation reste utile une fois en poste.',
+                  icon: '📈',
+                },
+              ].map(item => (
+                <div key={item.title} className="card hover:-translate-y-1 hover:border-brand-blue/20">
+                  <div className="text-3xl mb-4">{item.icon}</div>
+                  <h3 className="text-white font-bold mb-2">{item.title}</h3>
+                  <p className="text-slate-400 text-sm leading-relaxed">{item.desc}</p>
                 </div>
-              </div>
+              ))}
             </div>
           </SectionWrapper>
         </div>
       </section>
 
       <CTASection
-        title="Rejoignez la communauté TechFormations"
-        subtitle="Apprenez aux côtés de centaines de développeurs qui ont fait le même chemin."
+        title="Des formations conçues par des praticiens"
+        subtitle="Apprenez avec des ingénieurs qui ont construit et opéré des infrastructures de production pendant des années."
         primaryCta={{ label: 'Voir les formations →', href: '/formations' }}
         secondaryCta={{ label: 'Nous contacter', href: '/contact' }}
       />

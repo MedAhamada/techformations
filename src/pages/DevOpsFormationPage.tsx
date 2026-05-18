@@ -81,10 +81,7 @@ export default function DevOpsFormationPage() {
               <div className="flex flex-wrap items-center gap-2 mb-4">
                 <span className="section-badge">DevOps</span>
                 <span className="px-2 py-0.5 text-xs font-bold text-white bg-gradient-to-r from-brand-blue to-brand-cyan rounded-full">
-                  Bestseller
-                </span>
-                <span className="px-2 py-0.5 text-xs font-medium text-green-400 bg-green-400/10 border border-green-400/20 rounded-full">
-                  débutant DevOps accepté
+                  Nouveauté
                 </span>
                 <span className="px-2 py-0.5 text-xs font-medium text-brand-cyan bg-brand-cyan/10 border border-brand-cyan/20 rounded-full">
                   Formation en direct
@@ -114,19 +111,12 @@ export default function DevOpsFormationPage() {
                     {item.text}
                   </div>
                 ))}
-              </div>
-
-              {/* Rating */}
-              <div className="flex items-center gap-4 mb-8">
-                <div className="flex items-center gap-1.5">
-                  {[1,2,3,4,5].map(i => (
-                    <svg key={i} className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                    </svg>
-                  ))}
-                  <span className="text-white font-bold ml-1">4.9</span>
-                </div>
-                <span className="text-slate-400 text-sm">(312 avis) · 847 développeurs formés</span>
+                {formation.nextSession && (
+                  <div className="flex items-center gap-2 px-3 py-2 rounded-lg border border-green-400/30 bg-green-400/10 text-sm text-green-400 font-medium">
+                    <span>📅</span>
+                    Prochaine session : {formation.nextSession}
+                  </div>
+                )}
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4">
@@ -464,8 +454,8 @@ export default function DevOpsFormationPage() {
                         <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     ),
-                    title: 'Sessions planifiées',
-                    desc: 'Nous vous envoyons les prochaines dates disponibles',
+                    title: `Prochaine session : ${formation.nextSession ?? 'à venir'}`,
+                    desc: 'Les places sont limitées — inscrivez-vous pour réserver la vôtre.',
                   },
                   {
                     icon: (
@@ -543,7 +533,7 @@ export default function DevOpsFormationPage() {
       {/* Final CTA */}
       <CTASection
         title="Passez du développement à la maîtrise complète de la production"
-        subtitle="Rejoignez 847+ développeurs qui gèrent leur infrastructure avec confiance et sérénité."
+        subtitle="Gérez votre infrastructure de production avec confiance et sérénité."
         primaryCta={{ label: 'Réserver ma place →', href: '#inscription' }}
         secondaryCta={{ label: 'Voir le programme', href: '#programme' }}
       />

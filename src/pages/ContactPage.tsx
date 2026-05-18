@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useInView } from 'react-intersection-observer';
+import * as React from "react";
 
 function SectionWrapper({ children, className = '' }: { children: React.ReactNode; className?: string }) {
   const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true });

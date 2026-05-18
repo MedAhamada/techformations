@@ -13,11 +13,6 @@ export default function Footer() {
       { label: 'À propos', href: '/a-propos' },
       { label: 'Contact', href: '/contact' },
     ],
-    Ressources: [
-      { label: 'Blog technique', href: '#' },
-      { label: 'Newsletter', href: '#' },
-      { label: 'Communauté Discord', href: '#' },
-    ],
   };
 
   const technologies = ['Docker', 'Kubernetes', 'Linux', 'GitHub Actions', 'Nginx', 'Terraform', 'Grafana'];
@@ -25,7 +20,7 @@ export default function Footer() {
   return (
     <footer className="border-t border-white/5 bg-dark-950/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           {/* Brand */}
           <div className="lg:col-span-2">
             <Link to="/" className="flex items-center gap-3 mb-4 group w-fit">
@@ -78,6 +73,7 @@ export default function Footer() {
           <p className="text-slate-500 text-sm">
             © {year} TechFormations. Tous droits réservés.
           </p>
+          {/* Legal links — hidden until pages are ready
           <div className="flex items-center gap-6">
             <Link to="#" className="text-slate-500 hover:text-slate-300 text-sm transition-colors">
               Mentions légales
@@ -89,6 +85,7 @@ export default function Footer() {
               Confidentialité
             </Link>
           </div>
+          */}
           <div className="flex items-center gap-4">
             <a
               href="https://twitter.com"

@@ -71,12 +71,6 @@ const features = [
   },
 ];
 
-const stats = [
-  { value: '847+', label: 'Développeurs formés' },
-  { value: '4.9/5', label: 'Note moyenne' },
-  { value: '94%', label: 'Taux de complétion' },
-  { value: '35h', label: 'De contenu pratique' },
-];
 
 export default function HomePage() {
   const featuredFormation = formations.find(f => f.featured && f.available);
@@ -336,24 +330,10 @@ export default function HomePage() {
         </div>
       </section> */}
 
-      {/* Stats */}
-      <section className="py-16 border-y border-white/5 bg-dark-800/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {stats.map(stat => (
-              <SectionWrapper key={stat.label} className="text-center">
-                <p className="text-4xl md:text-5xl font-bold gradient-text mb-2">{stat.value}</p>
-                <p className="text-slate-400 text-sm">{stat.label}</p>
-              </SectionWrapper>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* CTA */}
       <CTASection
         title="Prêt à maîtriser votre stack de production ?"
-        subtitle="Rejoignez 847+ développeurs qui ont transformé leur rapport à la production avec nos formations."
+        subtitle="Transformez votre rapport à la production avec des formations concrètes et orientées terrain."
         primaryCta={{ label: 'Voir les formations →', href: '/formations' }}
         secondaryCta={{ label: 'En savoir plus', href: '/a-propos' }}
       />

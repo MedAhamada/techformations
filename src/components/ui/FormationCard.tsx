@@ -75,7 +75,7 @@ export default function FormationCard({ formation, variant = 'default' }: Format
       </div>
 
       {/* Footer */}
-      <div className="flex items-center justify-between pt-4 border-t border-white/5">
+      <div className="flex items-center pt-4 border-t border-white/5">
         <div className="flex items-center gap-3 text-sm text-slate-400">
           <span className="flex items-center gap-1">
             <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
@@ -84,16 +84,7 @@ export default function FormationCard({ formation, variant = 'default' }: Format
             </svg>
             {formation.duration}
           </span>
-          {formation.stats && (
-            <span className="flex items-center gap-1">
-              <svg className="w-3.5 h-3.5 text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-              </svg>
-              {formation.stats.rating}
-            </span>
-          )}
         </div>
-        <span className="text-xl font-bold text-white">{formation.priceLabel}</span>
       </div>
     </Link>
   );
@@ -133,23 +124,11 @@ function FeaturedCard({ formation }: { formation: Formation }) {
         ))}
       </ul>
 
-      {/* Stats */}
-      {formation.stats && (
-        <div className="flex items-center gap-6 mb-6 text-sm">
-          <span className="flex items-center gap-1 text-yellow-400">
-            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-            </svg>
-            <span className="font-semibold">{formation.stats.rating}</span>
-            <span className="text-slate-500">({formation.stats.reviews} avis)</span>
-          </span>
-          <span className="text-slate-400">{formation.stats.students.toLocaleString()} étudiants</span>
-          <span className="text-slate-400">{formation.duration}</span>
-        </div>
-      )}
+      <div className="flex items-center gap-6 mb-6 text-sm">
+        <span className="text-slate-400">{formation.duration}</span>
+      </div>
 
-      <div className="flex items-center justify-between">
-        <span className="text-3xl font-bold text-white">{formation.priceLabel}</span>
+      <div className="flex items-center justify-end">
         <span className="btn-primary text-sm">
           Voir la formation →
         </span>
@@ -176,7 +155,7 @@ function ComingSoonCard({ formation }: { formation: Formation }) {
           </span>
         ))}
       </div>
-      <div className="flex items-center justify-between pt-4 border-t border-white/5">
+      <div className="pt-4 border-t border-white/5">
         <span className="text-sm text-slate-500 flex items-center gap-1">
           <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
             <circle cx={12} cy={12} r={10} />
@@ -184,7 +163,6 @@ function ComingSoonCard({ formation }: { formation: Formation }) {
           </svg>
           {formation.duration}
         </span>
-        <span className="text-slate-400 font-semibold">{formation.priceLabel}</span>
       </div>
     </div>
   );

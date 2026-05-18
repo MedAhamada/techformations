@@ -14,9 +14,10 @@ export const formations: Formation[] = [
     duration: '35h',
     price: 499,
     priceLabel: '499€',
-    badge: 'Bestseller',
+    badge: 'Nouveauté',
     featured: true,
     available: true,
+    nextSession: '15 juin 2026',
     technologies: ['Linux', 'Docker', 'Nginx', 'GitHub Actions', 'PostgreSQL', 'Grafana', 'Sentry', 'Node.js', 'React'],
     outcomes: [
       'Déployer une application sur VPS',
