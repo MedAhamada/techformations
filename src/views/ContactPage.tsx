@@ -5,7 +5,7 @@ import * as React from "react";
 function SectionWrapper({ children, className = '' }: { children: React.ReactNode; className?: string }) {
   const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true });
   return (
-    <div ref={ref} className={`transition-all duration-700 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} ${className}`}>
+    <div ref={ref} className={`transition-all duration-700 ${inView ? 'opacity-100 translate-y-0' : 'opacity-100 translate-y-4'} ${className}`}>
       {children}
     </div>
   );

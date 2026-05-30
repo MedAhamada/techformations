@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { GitBranch } from 'lucide-react';
 import { useInView } from 'react-intersection-observer';
 import MetricsCard from '../components/ui/MetricsCard';
@@ -16,7 +15,7 @@ function SectionWrapper({ children, className = '', style }: { children: React.R
     <div
       ref={ref}
       style={style}
-      className={`transition-all duration-700 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} ${className}`}
+      className={`transition-all duration-700 ${inView ? 'opacity-100 translate-y-0' : 'opacity-100 translate-y-4'} ${className}`}
     >
       {children}
     </div>
@@ -104,15 +103,15 @@ export default function HomePage() {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-slide-up animation-delay-400">
-                <Link to="/formations" className="btn-primary text-base px-8 py-4">
+                <a href="/formations" className="btn-primary text-base px-8 py-4">
                   Découvrir les formations
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
                     <path d="M17 8l4 4m0 0l-4 4m4-4H3" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
-                </Link>
-                <Link to="/formations/devops-pour-developpeurs" className="btn-secondary text-base px-8 py-4">
+                </a>
+                <a href="/formations/devops-pour-developpeurs" className="btn-secondary text-base px-8 py-4">
                   Voir la formation DevOps
-                </Link>
+                </a>
               </div>
 
               {/* Stats */}
@@ -249,9 +248,9 @@ export default function HomePage() {
               <span className="section-badge mb-4">Catalogue</span>
               <h2 className="section-title">Nos formations</h2>
             </div>
-            <Link to="/formations" className="btn-ghost text-brand-blue hover:text-white">
+            <a href="/formations" className="btn-ghost text-brand-blue hover:text-white">
               Voir tout le catalogue →
-            </Link>
+            </a>
           </SectionWrapper>
 
           {/* Featured */}

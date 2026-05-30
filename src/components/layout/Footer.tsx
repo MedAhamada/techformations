@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -23,7 +22,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           {/* Brand */}
           <div className="lg:col-span-2">
-            <Link to="/" className="flex items-center gap-3 mb-4 group w-fit">
+            <a href="/" className="flex items-center gap-3 mb-4 group w-fit">
               <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-blue to-brand-cyan flex items-center justify-center">
                 <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5 text-white" stroke="currentColor" strokeWidth={2}>
                   <path d="M4 6h16M4 12h16M4 18h16" strokeLinecap="round" />
@@ -32,7 +31,7 @@ export default function Footer() {
               <span className="text-lg font-bold text-white">
                 Tech<span className="gradient-text-blue">Formations</span>
               </span>
-            </Link>
+            </a>
             <p className="text-slate-400 text-sm leading-relaxed mb-6 max-w-sm">
               Plateforme de formations techniques premium pour développeurs. Maîtrisez le DevOps, le Cloud et l'industrialisation logicielle.
             </p>
@@ -55,12 +54,12 @@ export default function Footer() {
               <ul className="space-y-3">
                 {items.map(item => (
                   <li key={item.label}>
-                    <Link
-                      to={item.href}
+                    <a
+                      href={item.href}
                       className="text-slate-400 hover:text-white text-sm transition-colors"
                     >
                       {item.label}
-                    </Link>
+                    </a>
                   </li>
                 ))}
               </ul>
@@ -88,7 +87,7 @@ export default function Footer() {
           */}
           <div className="flex items-center gap-4">
             <a
-              href="https://twitter.com"
+              href="https://twitter.com/techformations"
               target="_blank"
               rel="noreferrer"
               className="w-8 h-8 rounded-lg bg-white/5 hover:bg-white/10 flex items-center justify-center text-slate-400 hover:text-white transition-all"

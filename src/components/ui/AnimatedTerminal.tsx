@@ -33,6 +33,7 @@ interface AnimatedTerminalProps {
 
 export default function AnimatedTerminal({ lines = defaultLines, className = '', autoPlay = true }: AnimatedTerminalProps) {
   const [visibleLines, setVisibleLines] = useState<TerminalLine[]>([]);
+  const [cycleKey, setCycleKey] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -49,13 +50,16 @@ export default function AnimatedTerminal({ lines = defaultLines, className = '',
       timers.push(t);
     });
 
+    // Clear then restart after a pause to loop the animation
     const reset = setTimeout(() => {
       setVisibleLines([]);
+      const restart = setTimeout(() => setCycleKey(k => k + 1), 1200);
+      timers.push(restart);
     }, lines[lines.length - 1].delay + 3000);
     timers.push(reset);
 
     return () => timers.forEach(clearTimeout);
-  }, [autoPlay, lines]);
+  }, [autoPlay, lines, cycleKey]);
 
   const getLineStyle = (type: TerminalLine['type']) => {
     switch (type) {
@@ -90,7 +94,7 @@ export default function AnimatedTerminal({ lines = defaultLines, className = '',
       {/* Terminal content */}
       <div
         ref={containerRef}
-        className="p-5 space-y-1.5 min-h-[240px] max-h-[320px] overflow-y-auto font-mono text-sm"
+        className="p-5 space-y-1.5 h-[300px] overflow-y-auto font-mono text-sm"
       >
         {visibleLines.map((line, i) => (
           <div key={i} className={`flex items-start gap-0 animate-fade-in leading-relaxed ${getLineStyle(line.type)}`}>

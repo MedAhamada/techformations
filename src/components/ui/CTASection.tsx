@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
 
 interface CTASectionProps {
@@ -21,7 +20,7 @@ export default function CTASection({
   return (
     <section
       ref={ref}
-      className={`py-24 transition-all duration-700 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+      className={`py-24 transition-all duration-700 ${inView ? 'translate-y-0' : 'translate-y-4'}`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div
@@ -47,13 +46,13 @@ export default function CTASection({
               <p className="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto mb-10">{subtitle}</p>
             )}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link to={primaryCta.href} className="btn-primary text-base px-8 py-3.5">
+              <a href={primaryCta.href} className="btn-primary text-base px-8 py-3.5">
                 {primaryCta.label}
-              </Link>
+              </a>
               {secondaryCta && (
-                <Link to={secondaryCta.href} className="btn-secondary text-base px-8 py-3.5">
+                <a href={secondaryCta.href} className="btn-secondary text-base px-8 py-3.5">
                   {secondaryCta.label}
-                </Link>
+                </a>
               )}
             </div>
           </div>

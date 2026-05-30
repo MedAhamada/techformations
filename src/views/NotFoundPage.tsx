@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom';
-
 export default function NotFoundPage() {
   return (
     <div className="min-h-screen flex items-center justify-center px-4">
@@ -16,7 +14,7 @@ export default function NotFoundPage() {
             <div className="flex gap-2">
               <span className="text-brand-violet">$</span>
               <span className="text-brand-cyan">curl</span>
-              <span className="text-slate-400">https://techformations.fr{window.location.pathname}</span>
+              <span className="text-slate-400">https://techformations.kandorlab.com/...</span>
             </div>
             <div className="text-red-400">Error: 404 Not Found</div>
             <div className="text-slate-500">{"→ Page introuvable"}</div>
@@ -33,12 +31,12 @@ export default function NotFoundPage() {
           La page que vous cherchez n'existe pas ou a été déplacée.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link to="/" className="btn-primary">
+          <a href="/" className="btn-primary">
             Retour à l'accueil
-          </Link>
-          <Link to="/formations" className="btn-secondary">
+          </a>
+          <a href="/formations" className="btn-secondary">
             Voir les formations
-          </Link>
+          </a>
         </div>
       </div>
     </div>

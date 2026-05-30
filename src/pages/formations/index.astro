@@ -1,0 +1,11 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CatalogPage from '../../views/CatalogPage';
+---
+
+<Layout
+  title="Catalogue des formations — TechFormations"
+  description="Toutes nos formations techniques pour développeurs : DevOps, Docker, CI/CD, Linux, Kubernetes, Cloud. Des formations pratiques orientées terrain."
+>
+  <CatalogPage client:load />
+</Layout>

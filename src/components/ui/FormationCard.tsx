@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import type { Formation } from '../../types';
 
 interface FormationCardProps {
@@ -33,8 +32,8 @@ export default function FormationCard({ formation, variant = 'default' }: Format
   }
 
   return (
-    <Link
-      to={`/formations/${formation.slug}`}
+    <a
+      href={`/formations/${formation.slug}`}
       className="group block card hover:border-brand-blue/30 transition-all duration-300"
     >
       {/* Top */}
@@ -86,14 +85,14 @@ export default function FormationCard({ formation, variant = 'default' }: Format
           </span>
         </div>
       </div>
-    </Link>
+    </a>
   );
 }
 
 function FeaturedCard({ formation }: { formation: Formation }) {
   return (
-    <Link
-      to={`/formations/${formation.slug}`}
+    <a
+      href={`/formations/${formation.slug}`}
       className="group block relative overflow-hidden rounded-2xl border border-brand-blue/20 bg-gradient-to-br from-brand-blue/5 to-brand-cyan/5 p-8 hover:border-brand-blue/40 transition-all duration-300 hover:shadow-glow-blue"
     >
       {/* Glow effect */}
@@ -133,7 +132,7 @@ function FeaturedCard({ formation }: { formation: Formation }) {
           Voir la formation →
         </span>
       </div>
-    </Link>
+    </a>
   );
 }
 
