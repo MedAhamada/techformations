@@ -8,15 +8,12 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
-interface InscriptionPayload {
-  prenom: string;
-  nom: string;
+interface ContactPayload {
+  name: string;
   email: string;
-  telephone?: string;
-  entreprise?: string;
-  niveau: string;
-  message?: string;
-  formation: string;
+  subject?: string;
+  message: string;
+  type: 'question' | 'inscription';
 }
 
 serve(async (req: Request) => {
@@ -25,12 +22,12 @@ serve(async (req: Request) => {
   }
 
   try {
-    const payload: InscriptionPayload = await req.json();
-    const { prenom, nom, email, telephone, entreprise, niveau, message, formation } = payload;
+    const payload: ContactPayload = await req.json();
+    const { name, email, subject, message, type } = payload;
 
-    if (!prenom || !nom || !email || !formation) {
+    if (!name || !email || !message) {
       return new Response(
-        JSON.stringify({ error: 'Champs obligatoires manquants : prenom, nom, email, formation' }),
+        JSON.stringify({ error: 'Champs obligatoires manquants : name, email, message' }),
         { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
       );
     }
@@ -39,21 +36,25 @@ serve(async (req: Request) => {
       throw new Error('RESEND_API_KEY non configurée dans les variables d\'environnement Supabase');
     }
 
+    const typeLabel = type === 'inscription' ? 'Demande d\'inscription' : 'Question sur une formation';
+
     const html = `
       <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
-        <h2 style="color: #3B82F6;">Nouvelle inscription — ${formation}</h2>
+        <h2 style="color: #3B82F6;">Nouveau message — ${typeLabel}</h2>
         <table style="width: 100%; border-collapse: collapse;">
-          <tr><td style="padding: 8px; border-bottom: 1px solid #eee; font-weight: bold; width: 40%;">Prénom</td><td style="padding: 8px; border-bottom: 1px solid #eee;">${prenom}</td></tr>
-          <tr><td style="padding: 8px; border-bottom: 1px solid #eee; font-weight: bold;">Nom</td><td style="padding: 8px; border-bottom: 1px solid #eee;">${nom}</td></tr>
+          <tr><td style="padding: 8px; border-bottom: 1px solid #eee; font-weight: bold; width: 40%;">Nom</td><td style="padding: 8px; border-bottom: 1px solid #eee;">${name}</td></tr>
           <tr><td style="padding: 8px; border-bottom: 1px solid #eee; font-weight: bold;">Email</td><td style="padding: 8px; border-bottom: 1px solid #eee;"><a href="mailto:${email}">${email}</a></td></tr>
-          ${telephone ? `<tr><td style="padding: 8px; border-bottom: 1px solid #eee; font-weight: bold;">Téléphone</td><td style="padding: 8px; border-bottom: 1px solid #eee;">${telephone}</td></tr>` : ''}
-          ${entreprise ? `<tr><td style="padding: 8px; border-bottom: 1px solid #eee; font-weight: bold;">Entreprise</td><td style="padding: 8px; border-bottom: 1px solid #eee;">${entreprise}</td></tr>` : ''}
-          <tr><td style="padding: 8px; border-bottom: 1px solid #eee; font-weight: bold;">Niveau actuel</td><td style="padding: 8px; border-bottom: 1px solid #eee;">${niveau}</td></tr>
-          ${message ? `<tr><td style="padding: 8px; border-bottom: 1px solid #eee; font-weight: bold;">Message</td><td style="padding: 8px; border-bottom: 1px solid #eee;">${message}</td></tr>` : ''}
+          <tr><td style="padding: 8px; border-bottom: 1px solid #eee; font-weight: bold;">Type</td><td style="padding: 8px; border-bottom: 1px solid #eee;">${typeLabel}</td></tr>
+          ${subject ? `<tr><td style="padding: 8px; border-bottom: 1px solid #eee; font-weight: bold;">Sujet</td><td style="padding: 8px; border-bottom: 1px solid #eee;">${subject}</td></tr>` : ''}
+          <tr><td style="padding: 8px; border-bottom: 1px solid #eee; font-weight: bold; vertical-align: top;">Message</td><td style="padding: 8px; border-bottom: 1px solid #eee; white-space: pre-wrap;">${message}</td></tr>
         </table>
-        <p style="margin-top: 24px; color: #6b7280; font-size: 14px;">Reçu depuis le site TechFormations — formation : <strong>${formation}</strong></p>
+        <p style="margin-top: 24px; color: #6b7280; font-size: 14px;">Reçu depuis le formulaire de contact TechFormations.</p>
       </div>
     `;
+
+    const emailSubject = subject
+      ? `[Contact] ${subject} — ${name}`
+      : `[Contact] ${typeLabel} — ${name}`;
 
     const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
@@ -65,7 +66,7 @@ serve(async (req: Request) => {
         from: 'TechFormations <noreply@kandorlab.com>',
         to: [TO_EMAIL],
         reply_to: email,
-        subject: `[Inscription] ${formation} — ${prenom} ${nom}`,
+        subject: emailSubject,
         html,
       }),
     });
@@ -80,7 +81,7 @@ serve(async (req: Request) => {
       { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
     );
   } catch (err) {
-    console.error('send-inscription-email error:', err);
+    console.error('send-contact-email error:', err);
     return new Response(
       JSON.stringify({ error: err instanceof Error ? err.message : 'Erreur interne' }),
       { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },

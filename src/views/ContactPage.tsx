@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import * as React from "react";
+import { supabase } from '@/lib/supabase.ts';
 
 function SectionWrapper({ children, className = '' }: { children: React.ReactNode; className?: string }) {
   const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true });
@@ -57,6 +58,7 @@ export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [errors, setErrors] = useState<Partial<ContactForm>>({});
+  const [errorMessage, setErrorMessage] = useState('');
 
   const validate = (): boolean => {
     const newErrors: Partial<ContactForm> = {};
@@ -71,9 +73,26 @@ export default function ContactPage() {
     e.preventDefault();
     if (!validate()) return;
     setSubmitting(true);
-    await new Promise(r => setTimeout(r, 1500));
-    setSubmitting(false);
-    setSubmitted(true);
+    setErrorMessage('');
+    try {
+      const { error } = await supabase.functions.invoke('send-contact-email', {
+        body: {
+          name: form.name,
+          email: form.email,
+          subject: form.subject || undefined,
+          message: form.message,
+          type: form.type,
+        },
+      });
+      if (error) throw error;
+      setSubmitted(true);
+      setForm(initialForm);
+    } catch (err) {
+      console.error(err);
+      setErrorMessage(err instanceof Error ? err.message : 'Une erreur est survenue. Veuillez réessayer.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const set = (field: keyof ContactForm) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
@@ -290,6 +309,15 @@ export default function ContactPage() {
                   />
                   {errors.message && <p className="text-red-400 text-xs mt-1">{errors.message}</p>}
                 </div>
+
+                {errorMessage && (
+                  <div className="flex items-start gap-3 p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
+                    <svg className="w-4 h-4 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                      <path d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    {errorMessage}
+                  </div>
+                )}
 
                 <button
                   type="submit"
