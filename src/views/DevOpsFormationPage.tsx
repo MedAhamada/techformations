@@ -25,12 +25,12 @@ const problems = [
 
 const skills = [
   { icon: '🖥️', title: 'Déployer sur VPS', desc: 'Ubuntu, DigitalOcean, Hetzner, OVH — vous maîtrisez tout.' },
-  { icon: '🐳', title: 'Dockeriser une app', desc: 'Images, Dockerfile, Docker Compose, optimisation.' },
-  { icon: '⚡', title: 'Automatiser le déploiement', desc: 'Pipeline CI/CD complet avec GitHub Actions.' },
-  { icon: '🔒', title: 'Gérer HTTPS', desc: 'Let\'s Encrypt, Nginx, certificats SSL/TLS.' },
-  { icon: '📊', title: 'Superviser une app', desc: 'Grafana, Prometheus, Sentry, alertes.' },
+  { icon: '🐳', title: 'Dockeriser une app', desc: 'Images, Dockerfile, Docker Compose, mini-exercices à chaque étape.' },
+  { icon: '⚡', title: 'Automatiser le déploiement', desc: 'Pipeline CI/CD complet avec GitHub Actions en live coding.' },
+  { icon: '🔒', title: 'Gérer HTTPS et DNS', desc: 'Let\'s Encrypt, Nginx, DNS et certificats SSL/TLS.' },
+  { icon: '📊', title: 'Superviser une app', desc: 'Sentry, logs Docker centralisés, alertes applicatives.' },
   { icon: '🛡️', title: 'Sécuriser un serveur', desc: 'Hardening, firewall, fail2ban, secrets.' },
-  { icon: '💾', title: 'Gérer les sauvegardes', desc: 'Stratégie 3-2-1, scripts automatisés, restauration.' },
+  { icon: '💾', title: 'Gérer les sauvegardes', desc: 'Stratégie 3-2-1, scripts automatisés, restauration testée.' },
   { icon: '🔄', title: 'Zéro downtime', desc: 'Rolling updates, health checks, rollback auto.' },
 ];
 
@@ -64,9 +64,9 @@ const architectureTerminalLines = [
   { type: 'output' as const, text: '  backend:     # Node.js API → port 3000', delay: 900 },
   { type: 'output' as const, text: '  postgres:    # PostgreSQL → port 5432', delay: 1100 },
   { type: 'output' as const, text: '  redis:       # Cache → port 6379', delay: 1300 },
-  { type: 'output' as const, text: '  nginx:       # Reverse proxy + HTTPS', delay: 1500 },
-  { type: 'output' as const, text: '  prometheus:  # Métriques', delay: 1700 },
-  { type: 'output' as const, text: '  grafana:     # Dashboards', delay: 1900 },
+  { type: 'output' as const, text: '  nginx:       # Reverse proxy + HTTPS + DNS', delay: 1500 },
+  { type: 'output' as const, text: '  sentry:      # Tracking erreurs applicatives', delay: 1700 },
+  { type: 'output' as const, text: '  dozzle:      # Logs Docker centralisés', delay: 1900 },
   { type: 'success' as const, text: '✓ Architecture complète opérationnelle', delay: 2500 },
 ];
 
@@ -258,14 +258,14 @@ export default function DevOpsFormationPage() {
           <SectionWrapper>
             <div className="grid md:grid-cols-2 gap-4">
               {[
-                { topic: 'Linux & serveurs', desc: 'Navigation, gestion des processus, systèmes de fichiers, scripts shell' },
-                { topic: 'Réseau & DNS', desc: 'IP, ports, firewall, SSH, résolution de noms' },
-                { topic: 'Docker & containerisation', desc: 'Images, Dockerfile, Docker Compose, optimisation, volumes' },
-                { topic: 'Nginx & reverse proxy', desc: 'Configuration, HTTPS, Let\'s Encrypt, load balancing' },
-                { topic: 'GitHub Actions (CI/CD)', desc: 'Workflows, build, test, déploiement automatisé' },
-                { topic: 'Monitoring & observabilité', desc: 'Grafana, Prometheus, Sentry, alertes' },
-                { topic: 'Sécurité serveur', desc: 'Hardening, secrets, fail2ban, audit' },
-                { topic: 'Sauvegardes & résilience', desc: 'Stratégies, scripts, restauration testée' },
+                { topic: 'Git avancé & Workflows', desc: 'Git Flow, branches, tags, releases, hooks — posé en tout début de parcours' },
+                { topic: 'Linux & Réseau', desc: 'Navigation, permissions, systemd, SSH, IP, ports, firewall UFW' },
+                { topic: 'Docker & Containerisation', desc: 'Images, Dockerfile, Docker Compose, volumes — mini-exercices pratiques à chaque étape' },
+                { topic: 'Nginx, DNS & Reverse Proxy', desc: 'Configuration, DNS, HTTPS, Let\'s Encrypt — DNS intégré au bon moment' },
+                { topic: 'GitHub Actions (CI/CD)', desc: 'Workflows, build, test, déploiement VPS en live coding interactif' },
+                { topic: 'Observabilité & Backups', desc: 'Sentry, logs Docker centralisés, stratégie 3-2-1, scripts de restauration' },
+                { topic: 'Sécurité serveur', desc: 'Hardening, secrets, fail2ban, audit des vulnérabilités' },
+                { topic: 'Projet Final fil rouge', desc: 'Application fullstack en production : infra, CI/CD, observabilité, sécurité' },
               ].map(item => (
                 <div key={item.topic} className="flex items-start gap-4 p-5 glass rounded-xl border border-white/5 hover:border-brand-blue/20 transition-colors group">
                   <div className="w-6 h-6 rounded-full bg-brand-blue/20 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:bg-brand-blue/30 transition-colors">
@@ -352,10 +352,10 @@ export default function DevOpsFormationPage() {
               <div className="space-y-3">
                 {[
                   'Architecture microservices dockerisée',
-                  'CI/CD avec GitHub Actions',
+                  'CI/CD avec GitHub Actions (live coding)',
                   'HTTPS automatique via Let\'s Encrypt',
-                  'Monitoring Grafana + Prometheus',
                   'Tracking d\'erreurs avec Sentry',
+                  'Logs Docker centralisés',
                   'Sauvegardes automatisées',
                   'Déploiement zero-downtime',
                 ].map(item => (
