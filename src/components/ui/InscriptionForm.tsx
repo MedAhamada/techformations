@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { supabase } from '../../lib/supabase';
+import { supabase } from '@/lib/supabase.ts';
+import * as React from 'react';
 
 interface InscriptionFormProps {
   formation: string;
@@ -61,7 +62,7 @@ export default function InscriptionForm({ formation }: InscriptionFormProps) {
     setErrorMessage('');
 
     try {
-      const { error } = await supabase.functions.invoke('send-inscription-email', {
+      const { error } = await supabase.functions.invoke('notify-inscription', {
         body: { ...form, formation },
       });
 
