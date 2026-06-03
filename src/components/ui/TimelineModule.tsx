@@ -3,6 +3,7 @@ import type { FormationModule } from '../../types';
 
 interface TimelineModuleProps {
   modules: FormationModule[];
+  displayedModules: FormationModule[];
 }
 
 const lessonTypeIcons = {
@@ -49,8 +50,8 @@ const lessonTypeLabels = {
   project: 'Projet',
 };
 
-export default function TimelineModule({ modules }: TimelineModuleProps) {
-  const [openModules, setOpenModules] = useState<Set<string>>(new Set([modules[0]?.id]));
+export default function TimelineModule({ modules, displayedModules }: TimelineModuleProps) {
+  const [openModules, setOpenModules] = useState<Set<string>>(new Set([displayedModules[0]?.id]));
 
   const toggle = (id: string) => {
     setOpenModules(prev => {
@@ -79,7 +80,7 @@ export default function TimelineModule({ modules }: TimelineModuleProps) {
 
       {/* Modules */}
       <div className="space-y-2">
-        {modules.map((module, moduleIndex) => {
+        {displayedModules.map((module, moduleIndex) => {
           const isOpen = openModules.has(module.id);
           return (
             <div

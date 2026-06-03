@@ -298,7 +298,7 @@ export default function DevOpsFormationPage() {
           <SectionWrapper>
             {formation.modules && (
               <>
-                <TimelineModule modules={displayedModules} />
+                <TimelineModule displayedModules={displayedModules} modules={formation.modules} />
                 {!showAllModules && formation.modules.length > 5 && (
                   <div className="mt-4 text-center">
                     <button
