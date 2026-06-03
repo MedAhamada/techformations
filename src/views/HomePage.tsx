@@ -55,7 +55,7 @@ const features = [
       </svg>
     ),
     title: 'Communauté active',
-    desc: 'Accès à notre Discord privé avec des centaines de développeurs qui apprenent ensemble.',
+    desc: 'Accès à notre Slack privé dédié avec plusieurs développeurs qui apprennent ensemble.',
     color: 'text-brand-violet',
   },
   {
@@ -85,7 +85,7 @@ export default function HomePage() {
         <div className="absolute bottom-1/4 left-1/4 w-64 h-64 bg-brand-violet/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '3s' }} />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             {/* Left content */}
             <div className="text-center lg:text-left">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 mb-6 text-xs font-semibold text-brand-cyan bg-brand-cyan/10 border border-brand-cyan/20 rounded-full animate-fade-in">
@@ -141,17 +141,15 @@ export default function HomePage() {
               */}
             </div>
 
-            {/* Right: Terminal + Metrics */}
-            
-            {/* Right: dashboard */}
-            <div className="relative animate-fade-in" style={{ animationDelay: '0.3s' }}>
+            {/* Right: dashboard — hidden on mobile, decorative */}
+            <div className="hidden lg:block relative animate-fade-in" style={{ animationDelay: '0.3s' }}>
               <div className="relative">
                 {/* Glow */}
                 <div className="absolute -inset-4 bg-blue-500/10 rounded-3xl blur-xl" />
 
                 <div className="relative space-y-3">
                   {/* Metrics row */}
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className="grid grid-cols-2 gap-3 min-w-0">
                     <MetricsCard label="Déploiements" value="24/7" change="+12% ce mois" trend="up" color="green" />
                     <MetricsCard label="Uptime" value="99.9%" change="30j sans incident" trend="up" color="cyan" />
                   </div>
@@ -204,7 +202,7 @@ export default function HomePage() {
       {/* Pipeline section */}
       <section className="py-24 bg-dark-800/30 border-y border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             <SectionWrapper>
               <span className="section-badge mb-4">Pipeline CI/CD</span>
               <h2 className="section-title mb-4">

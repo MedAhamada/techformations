@@ -29,12 +29,12 @@ export const faqDevops: FAQ[] = [
   {
     question: 'Y a-t-il un support pendant la formation ?',
     answer:
-      'Oui. Les accès incluent l\'accès à notre communauté Discord privée où vous pouvez poser vos questions, partager votre avancement et interagir avec les autres apprenants. Le formateur répond régulièrement aux questions.',
+      'Oui. Les accès incluent l\'accès à notre espace Slack privé dédié à la formation où vous pouvez poser vos questions, partager votre avancement et interagir avec les autres apprenants. Le formateur répond régulièrement aux questions.',
   },
   {
-    question: 'Puis-je obtenir un remboursement ?',
+    question: 'Quelle est la politique de remboursement ?',
     answer:
-      'Nous offrons une garantie satisfait ou remboursé de 14 jours. Si la formation ne correspond pas à vos attentes dans les 14 jours suivant l\'achat, nous vous remboursons intégralement, sans question.',
+      'Le paiement s\'effectue en plusieurs fois. Les versements déjà réglés ne sont pas remboursables, mais vous pouvez arrêter à tout moment et ne pas payer les échéances suivantes — sans justification ni pénalité.',
   },
   {
     question: 'La formation débouche-t-elle sur une certification ?',

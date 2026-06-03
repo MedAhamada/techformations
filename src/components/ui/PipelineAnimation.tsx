@@ -89,7 +89,7 @@ export default function PipelineAnimation({ className = '' }: { className?: stri
   const { ref, inView } = useInView({ threshold: 0.3, triggerOnce: true });
 
   return (
-    <div ref={ref} className={`rounded-xl border border-white/10 bg-dark-800/60 overflow-hidden ${className}`}>
+    <div ref={ref} className={`rounded-xl border border-white/10 bg-dark-800/60 overflow-hidden w-full min-w-0 ${className}`}>
       {/* Header */}
       <div className="flex items-center gap-3 px-5 py-3 border-b border-white/5 bg-dark-900/50">
         <div className="w-2 h-2 rounded-full bg-brand-blue animate-pulse" />
@@ -99,7 +99,7 @@ export default function PipelineAnimation({ className = '' }: { className?: stri
 
       {/* Pipeline steps */}
       <div className="p-5">
-        <div className="flex items-start gap-0 overflow-x-auto pb-2">
+        <div className="flex items-start gap-0 overflow-x-auto pb-2 max-w-full">
           {steps.map((step, index) => (
             <div key={step.label} className="flex items-center flex-shrink-0">
               {/* Step */}

@@ -485,8 +485,8 @@ export default function DevOpsFormationPage() {
                         <path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     ),
-                    title: 'Paiement sécurisé',
-                    desc: 'Facturation après confirmation de votre place',
+                    title: 'Paiement en plusieurs fois',
+                    desc: 'Réglez en plusieurs versements selon votre rythme',
                   },
                 ].map(item => (
                   <div key={item.title} className="flex items-start gap-4">
